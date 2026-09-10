@@ -1,0 +1,55 @@
+{
+  "buildPresets": [
+    { "configurePreset": "debug", "name": "debug" },
+    { "configurePreset": "debug-opt", "name": "debug-opt" },
+    { "configurePreset": "sanitize", "name": "sanitize" },
+    { "configurePreset": "tsan", "name": "tsan" },
+    { "configurePreset": "release", "name": "release" }
+  ],
+  "cmakeMinimumRequired": { "major": 4, "minor": 0, "patch": 0 },
+  "configurePresets": [
+    {
+      "binaryDir": "${sourceDir}/build-debug",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" },
+      "displayName": "Debug",
+      "generator": "Ninja",
+      "name": "debug"
+    },
+    {
+      "binaryDir": "${sourceDir}/build-debug-opt",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "DebugOpt" },
+      "displayName": "Debug Optimized",
+      "generator": "Ninja",
+      "name": "debug-opt"
+    },
+    {
+      "binaryDir": "${sourceDir}/build-sanitize",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Sanitize" },
+      "displayName": "Sanitize",
+      "generator": "Ninja",
+      "name": "sanitize"
+    },
+    {
+      "binaryDir": "${sourceDir}/build-tsan",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "TSan" },
+      "displayName": "ThreadSanitizer",
+      "generator": "Ninja",
+      "name": "tsan"
+    },
+    {
+      "binaryDir": "${sourceDir}/build-release",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" },
+      "displayName": "Release",
+      "generator": "Ninja",
+      "name": "release"
+    }
+  ],
+  "testPresets": [
+    { "configurePreset": "debug", "name": "debug" },
+    { "configurePreset": "debug-opt", "name": "debug-opt" },
+    { "configurePreset": "sanitize", "name": "sanitize" },
+    { "configurePreset": "tsan", "name": "tsan" },
+    { "configurePreset": "release", "name": "release" }
+  ],
+  "version": 10
+}
