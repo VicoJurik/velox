@@ -40,3 +40,31 @@ jobs:
 
       - name: Check clang-tidy
         run: cmake --build build-debug --target velox-tidy-check
+
+  sanitize:
+    name: ASan + UBSan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ninja-build
+
+      - name: Install CMake
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: 4.2.3
+
+      - name: Configure
+        run: cmake --preset sanitize
+
+      - name: Build
+        run: cmake --build --preset sanitize
+
+      - name: Test
+        run: ctest --preset sanitize --output-on-failure
