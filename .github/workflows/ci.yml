@@ -37,3 +37,6 @@ jobs:
 
       - name: Check formatting
         run: cmake --build build-debug --target velox-format-check
+
+      - name: Check clang-tidy
+        run: cmake --build build-debug --target velox-tidy-check
