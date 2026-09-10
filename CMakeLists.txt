@@ -32,6 +32,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(VELOX_ENABLE_TESTS "Build Velox tests" ON)
 option(VELOX_ENABLE_CLANG_TIDY "Enable clang-tidy checks" OFF)
+option(VELOX_ENABLE_WERROR "Treat warnings as errors" OFF)
 
 # ---------------------------------------------------------------------------
 # Build types
@@ -70,19 +71,61 @@ set(VELOX_WARNING_FLAGS
     -Wall
     -Wextra
     -Wpedantic
+
+    # Conversions
     -Wconversion
     -Wsign-conversion
-    -Wshadow
+    -Wdouble-promotion
+
+    # Declarations / definitions
     -Wstrict-prototypes
     -Wmissing-prototypes
     -Wold-style-definition
+    -Wmissing-declarations
+
+    # Control flow
+    -Wswitch-enum
+    -Wunreachable-code
+
+    # Types / casts
+    -Wcast-align
+    -Wcast-qual
+    -Wwrite-strings
+
+    # Shadowing / suspicious constructs
+    -Wshadow
     -Wundef
-    -Wformat=2
-    -Wdouble-promotion
-    -Wnull-dereference
     -Wvla
+
+    # Format / strings
+    -Wformat=2
+
+    # Miscellaneous
+    -Wnull-dereference
+    -Werror=implicit-function-declaration
+
+    # Linkage / compatibility
     -fno-common
 )
+
+if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    list(APPEND VELOX_WARNING_FLAGS
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Wlogical-op
+        -Wuseless-cast
+        -Warray-bounds
+        -Wstringop-overflow
+        -Wstringop-overread
+        -Wuse-after-free
+    )
+endif()
+
+if(VELOX_ENABLE_WERROR)
+    list(APPEND VELOX_WARNING_FLAGS
+        -Werror
+    )
+endif()
 
 # ---------------------------------------------------------------------------
 # Sources

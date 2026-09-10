@@ -27,7 +27,7 @@ jobs:
           cmakeVersion: 4.2.3
 
       - name: Configure
-        run: cmake --preset debug -DVELOX_ENABLE_CLANG_TIDY=ON
+        run: cmake --preset debug -DVELOX_ENABLE_CLANG_TIDY=ON -DVELOX_ENABLE_WERROR=ON
 
       - name: Build
         run: cmake --build --preset debug
