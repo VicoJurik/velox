@@ -30,3 +30,6 @@ jobs:
 
       - name: Test
         run: ctest --preset debug --output-on-failure
+
+      - name: Check formatting
+        run: cmake --build build-debug --target velox-format-check
