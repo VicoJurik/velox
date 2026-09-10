@@ -31,7 +31,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(VELOX_ENABLE_TESTS "Build Velox tests" ON)
-option(VELOX_ENABLE_CLANG_TIDY "Run clang-tidy during compilation" OFF)
+option(VELOX_ENABLE_CLANG_TIDY "Enable clang-tidy checks" OFF)
 
 # ---------------------------------------------------------------------------
 # Build types
@@ -124,10 +124,6 @@ if(VELOX_ENABLE_CLANG_TIDY)
         CLANG_TIDY_EXECUTABLE
         NAMES clang-tidy-21 clang-tidy
         REQUIRED
-    )
-
-    set_target_properties(velox PROPERTIES
-        C_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE}"
     )
 
     add_custom_target(velox-tidy-check
