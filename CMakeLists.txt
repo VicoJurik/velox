@@ -173,6 +173,7 @@ if(VELOX_ENABLE_CLANG_TIDY)
         COMMAND
             "${CLANG_TIDY_EXECUTABLE}"
             -p "${CMAKE_BINARY_DIR}"
+            --extra-arg=-Wno-unknown-warning-option
             ${VELOX_SOURCES}
         WORKING_DIRECTORY
             "${CMAKE_CURRENT_SOURCE_DIR}"
